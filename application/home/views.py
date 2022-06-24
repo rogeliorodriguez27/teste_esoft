@@ -5,7 +5,7 @@ from django.views.generic import View
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from crud.models import Products
+from products.models import Products
 
 # Create your views here.
    
@@ -20,6 +20,8 @@ class HomeView(TemplateView, LoginRequiredMixin):
         context = super(HomeView, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the products
         context['productsCount'] = Products.objects.all().count()
+        context['title'] = 'Home'
+
         return context
 
 

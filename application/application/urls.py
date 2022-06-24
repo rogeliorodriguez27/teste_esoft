@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^accounts/', include('accounts.urls')),
     url(r'^', include('index.urls')),
     url(r'^home/', include('home.urls')),
-    url(r'^crud/', include('crud.urls')),
+    url(r'^products/', include('products.urls')),
 
 
 ]

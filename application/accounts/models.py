@@ -9,10 +9,10 @@ class CustomUser(AbstractUser):
     cep = models.CharField(verbose_name='CEP',  max_length=9,)
     address = models.CharField(max_length=30, verbose_name='Endereço', )
     number = models.PositiveIntegerField(default=0, verbose_name='Número', validators=[MaxValueValidator(9999)],)
-    complement = models.CharField(max_length=20, verbose_name='Complemento', null=True )
+    complement = models.CharField(max_length=20, verbose_name='Complemento', null=True, blank=True )
     neighborhood = models.CharField(max_length=20, verbose_name='Bairro', )
     city = models.CharField(max_length=20, verbose_name='Cidade', )
-    uf = models.CharField( max_length=20, verbose_name='Unidade federativa', default='MG')
+    uf = models.CharField( max_length=2, verbose_name='Unidade federativa', default='MG')
     email = models.EmailField(_('email address'), unique=True)
     username = None
 

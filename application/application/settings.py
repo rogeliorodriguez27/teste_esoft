@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'index',
     'home',
-    'crud',
+    'products',
     #extensions
     'widget_tweaks',
     'crispy_forms',

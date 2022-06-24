@@ -1,0 +1,13 @@
+{% load crispy_forms_tags %}
+<form method="post" data-url="{% url 'products:product_create' %}" class="create-form">
+	{% csrf_token %}
+		<div class="modal-header">
+		<h5 class="modal-title" >Criar Produto</h5>
+		</div>
+		<div class="modal-body">
+		{{form|crispy}}
+		</div>
+		<div class="modal-footer">
+		<button type="submit" class="btn btn-primary">Criar Produto</button>
+		</div>
+</form>

@@ -1,0 +1,28 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+  <h1 class="page-header">Produtos</h1>
+  <button class="btn btn-primary show-form" data-url="{% url 'products:product_create' %}">
+  <span class="glyphicon glyphicon-plus"></span>
+  Cadastrar
+  </button>
+  <table class="table" id="product-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Estoque</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% include "product_list_2.html" %}
+    </tbody>
+  </table>
+
+  <div class="modal fade" id="modal-product">
+    <div class="modal-dialog">
+      <div class="modal-content"></div>
+    </div>
+  </div>
+{% endblock %}

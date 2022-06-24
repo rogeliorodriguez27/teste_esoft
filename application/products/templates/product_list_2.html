@@ -1,0 +1,30 @@
+{% for product in products %}
+{% if product.stock < 1 %}  
+<tr class="table-danger">
+  {% else %}
+  <tr>
+  {% endif %}
+  <td>{{ product.id }}</td>
+  <td>{{ product.name }}</td>
+  <td>{{ product.price }}</td>
+  <td>{{ product.stock }}</td>
+  
+    
+    <td>  
+      <button class="btn btn-warning show-form-update" data-url="{% url 'products:product_update' product.id %}">
+      <span class="glyphicon glyphicon-pencil"></span>
+      Editar 
+      </button>
+    </td>
+    <td>  
+      <button class="btn btn-danger show-form-delete" data-url="{% url 'products:product_delete' product.id %}">
+      <span class="glyphicon glyphicon-trash"></span>
+      Excluir 
+      </button>
+    </td>
+  </tr>
+{% empty %}
+  <tr>
+    <td colspan="7" class="text-center bg-warning">0 Registros</td>
+  </tr>
+{% endfor %}

@@ -1,0 +1,13 @@
+{% load crispy_forms_tags %}
+<form method="post" data-url="{% url 'products:product_delete' product.id %}" class="delete-form">
+	{% csrf_token %}
+		<div class="modal-header">
+		<h5 class="modal-title" >Excluir Produto</h5>
+		</div>
+		<div class="modal-body">
+		<p class="lead"> Seguro que deseja excluir <strong>{{product.name}}</strong></p>
+		</div>
+		<div class="modal-footer">
+		<button type="submit" class="btn btn-danger">Excluir</button>
+		</div>
+</form>
