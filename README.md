@@ -6,12 +6,18 @@ Rogelio Rodriguez
 rogelio23rodriguez@gmail.com
 
 # Building
-Crie uma pasta para o DJango
+Crie uma pasta para o Django.
+
 Dentro da pasta, crie um ambiente com o comando python -m venv <pasta_do_ambiente>
+
 Ative o ambiente usando . <pasta_do_ambiente>/bin/activate, se você estiver no windows use .\<pasta_do_ambiente>\Scripts\activate
-Após criado, entre na pasta raiz do projeto
-instalar as bibliotecas colocando-as na terminal pip install -r requirements.txt
-para inicir execute os comandos:
+
+Após criado, entre na pasta raiz do projeto.
+
+Instalar as bibliotecas colocando na terminal pip install -r requirements.txt
+
+Para iniciar execute o comando:
+
 python manage.py runserver
 
 acesse o sistema pelo navegador no link: http://localhost:8000
