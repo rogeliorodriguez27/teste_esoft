@@ -1,0 +1,254 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Gmayo: Gestor de Proyectos</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/ico" href="/static/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/static/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/static/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-form-title">
+					<img id="loginLogo" src="/static/images/logo_2.png" alt="Bienvenido a Gmayo">
+				</div>
+
+				<form class="login100-form validate-form" method="POST">
+					{% csrf_token %}
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Requerido">
+						<label class="label-input100" for="first_name">Nome:</label>
+						
+						{{ form.first_name|add_class:'input100' }}
+
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Requerido">
+						<label class="label-input100" for="email">Email:</label>
+
+						{{ form.email|add_class:'input100' }}
+
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
+						<label class="label-input100" for="password">Senha:</label>
+
+						{{ form.password1|add_class:'input100' }}
+						<span class="focus-input100"></span>
+					</div>
+					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
+						<label class="label-input100" for="password">Repetir Senha:</label>
+
+						{{ form.password2|add_class:'input100' }}
+						<span class="focus-input100"></span>
+					</div>
+
+
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Requerido">
+						<label class="label-input100" for="cep">CEP:</label>
+
+						{{ form.cep|add_class:'input100'|attr:"onblur:pesquisacep(this.value)" }}
+
+						<span class="focus-input100"></span>
+					</div>
+
+
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Requerido">
+						<label class="label-input100" for="address">Endereço:</label>
+
+						{{ form.address|add_class:'input100' }}
+
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Requerido">
+						<label class="label-input100" for="number">Número:</label>
+
+						{{ form.number|add_class:'input100' }}
+
+						<span class="focus-input100"></span>
+					</div>
+
+
+					<div class="wrap-input100 validate-input m-b-26" >
+						<label class="label-input100" for="complement">Complemento:</label>
+
+						{{ form.complement|add_class:'input100' }}
+
+						<span class="focus-input100"></span>
+					</div>
+
+
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Requerido">
+						<label class="label-input100" for="neighborhood">Bairro:</label>
+
+						{{ form.neighborhood|add_class:'input100' }}
+
+						<span class="focus-input100"></span>
+					</div>
+
+
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Requerido">
+						<label class="label-input100" for="city">Cidade:</label>
+
+						{{ form.city|add_class:'input100' }}
+
+						<span class="focus-input100"></span>
+					</div>
+
+
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Requerido">
+						<label class="label-input100" for="uf">Estado:</label>
+
+						{{ form.uf|add_class:'input100' }}
+
+						<span class="focus-input100"></span>
+					</div>
+
+
+					<div class="flex-sb-m w-full p-b-30">
+
+
+						<div >
+							<a href="{% url 'accounts:login' %}" class="txt1 "  >
+								Tem Conta? Login
+							</a>
+
+						</div>
+					</div>
+
+					<div class="container-login100-form-btn">
+							<input type="submit" value="Registrarse" class="login100-form-btn" />
+						
+					        {{ form.non_field_errors }}
+                    {% for hidden_field in form.hidden_fields %}
+                    {{ hidden_field.errors }}
+                    {{ hidden_field }}
+                    {% endfor %}
+						{% for field in form.visible_fields %}
+                    {{ field.errors }}
+                    {% endfor %}
+
+					
+					</div>
+					<input type="hidden" name="next" value="{{ next }}" />
+				</form>
+			</div>
+		</div>
+	</div>
+	
+<!--===============================================================================================-->
+
+    <script>
+    
+		function limpa_formulário_cep() {
+				//Limpa valores do formulário de cep.
+				document.getElementById('id_address').value=("");
+				document.getElementById('id_neighborhood').value=("");
+				document.getElementById('id_city').value=("");
+				document.getElementById('id_uf').value=("");
+		}
+	
+		function meu_callback(conteudo) {
+			if (!("erro" in conteudo)) {
+				//Atualiza os campos com os valores.
+				document.getElementById('id_address').value=(conteudo.logradouro);
+				document.getElementById('id_neighborhood').value=(conteudo.bairro);
+				document.getElementById('id_city').value=(conteudo.localidade);
+				document.getElementById('id_uf').value=(conteudo.uf);
+			} //end if.
+			else {
+				//CEP não Encontrado.
+				limpa_formulário_cep();
+				alert("CEP não encontrado.");
+			}
+		}
+			
+		function pesquisacep(valor) {
+	
+			//Nova variável "cep" somente com dígitos.
+			var cep = valor.replace(/\D/g, '');
+	
+			//Verifica se campo cep possui valor informado.
+			if (cep != "") {
+	
+				//Expressão regular para validar o CEP.
+				var validacep = /^[0-9]{8}$/;
+	
+				//Valida o formato do CEP.
+				if(validacep.test(cep)) {
+	
+					//Preenche os campos com "..." enquanto consulta webservice.
+					document.getElementById('id_address').value="...";
+					document.getElementById('id_neighborhood').value="...";
+					document.getElementById('id_city').value="...";
+					document.getElementById('id_uf').value="...";
+					
+					//Cria um elemento javascript.
+					var script = document.createElement('script');
+	
+					//Sincroniza com o callback.
+					script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+	
+					//Insere script no documento e carrega o conteúdo.
+					document.body.appendChild(script);
+	
+				} //end if.
+				else {
+					//cep é inválido.
+					limpa_formulário_cep();
+					alert("Formato de CEP inválido.");
+				}
+			} //end if.
+			else {
+				//cep sem valor, limpa formulário.
+				limpa_formulário_cep();
+			}
+		};
+	
+		</script>
+
+<!--===============================================================================================-->
+	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendor/bootstrap/js/popper.js"></script>
+	<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendor/daterangepicker/moment.min.js"></script>
+	<script src="/static/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/js/main.js"></script>
+
+</body>
+</html>
